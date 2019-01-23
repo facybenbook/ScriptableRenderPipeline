@@ -43,7 +43,7 @@ float3 Lanczos(TEXTURE2D(_InputTexture), float2 inUV)
     float2 texelLoc = inUV * TexSize;
     float2 center = floor(texelLoc - 0.5) + 0.5;
 
-    float2 x = texelLoc - center + (a - 1.0f);
+    float2 x = texelLoc - center + (a - 1.0);
     float2 xPI = x * PI;
 
     // Note lanczos weights are sinc(x)*sinc(x/a)
@@ -80,7 +80,7 @@ float3 Lanczos(TEXTURE2D(_InputTexture), float2 inUV)
     float2 weight0 = sinLancz        / (x  * x);
     float2 weight1 = w14             / (xMin1 * xMin1);
     float2 weight2 = w25             / (xMin2 * xMin2);
-    float2 weight3 = (2.0f*sinLancz) / (xMin3 * xMin3);
+    float2 weight3 = (2.0*sinLancz) / (xMin3 * xMin3);
     float2 weight4 = w14             / (xMin4 * xMin4);
     float2 weight5 = w25             / (xMin5 * xMin5);
 
@@ -107,5 +107,5 @@ float3 Lanczos(TEXTURE2D(_InputTexture), float2 inUV)
     accumulation += float4(Bilinear(_InputTexture, float2(UV2.x, UV2.y)), 1) * weight4.x * weight4.y;
     accumulation += float4(Bilinear(_InputTexture, float2(UV3.x, UV0.y)), 1) * weight5.x * weight23.y;
 
-    return accumulation /= accumulation.w;
+    return accumulation.xyz /= accumulation.w;
 }
