@@ -113,7 +113,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
 
     /// <summary>BitField that state which element is overrided.</summary>
     [Serializable]
-    [System.Diagnostics.DebuggerDisplay("FrameSettings overriding {mask.humanizedData}")]
+    [System.Diagnostics.DebuggerDisplay("{mask.humanizedData}")]
     public struct FrameSettingsOverrideMask
     {
         [SerializeField]
@@ -122,7 +122,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
     
     /// <summary>Per renderer and per frame settings.</summary>
     [Serializable]
-    [System.Diagnostics.DebuggerDisplay("FrameSettings {bitDatas.humanizedData}")]
+    [System.Diagnostics.DebuggerDisplay("{bitDatas.humanizedData}")]
     public partial struct FrameSettings
     {
         /// <summary>Default FrameSettings for Camera renderer.</summary>
@@ -302,7 +302,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
 
             // VR TODO: The work will be implemented piecemeal to support all passes
             // No recursive reflections
-            sanitazedFrameSettings.bitDatas[(int)FrameSettingsField.SSR] &= !reflection && renderPipelineSettings.supportSSR && !msaa && !preview && stereo;
+            sanitazedFrameSettings.bitDatas[(int)FrameSettingsField.SSR] &= !reflection && renderPipelineSettings.supportSSR && !msaa && !preview && !stereo;
             sanitazedFrameSettings.bitDatas[(int)FrameSettingsField.SSAO] &= renderPipelineSettings.supportSSAO && !preview;
             sanitazedFrameSettings.bitDatas[(int)FrameSettingsField.SubsurfaceScattering] &= !reflection && renderPipelineSettings.supportSubsurfaceScattering;
 
@@ -365,7 +365,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
         
         public static bool operator ==(FrameSettings a, FrameSettings b) => a.bitDatas == b.bitDatas;
         public static bool operator !=(FrameSettings a, FrameSettings b) => a.bitDatas != b.bitDatas;
-        public override bool Equals(object obj) => (obj is FrameSettings) && bitDatas.Equals((FrameSettings)obj);
+        public override bool Equals(object obj) => (obj is FrameSettings) && bitDatas.Equals(((FrameSettings)obj).bitDatas);
         public override int GetHashCode() => -1690259335 + bitDatas.GetHashCode();
     }
 }
