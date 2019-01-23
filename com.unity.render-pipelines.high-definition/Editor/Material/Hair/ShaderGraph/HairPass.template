@@ -224,9 +224,23 @@ $include("SharedCode.template.hlsl")
 
         surfaceData.geomNormalWS = fragInputs.worldToTangent[2];
 
-        surfaceData.tangentWS = normalize(fragInputs.worldToTangent[0].xyz);    // The tangent is not normalize in worldToTangent for mikkt. TODO: Check if it expected that we normalize with Morten. Tag: SURFACE_GRADIENT
+        // For a typical Unity quad, you have tangent vectors pointing to the right (X axis),
+        // and bitangent vectors pointing up (Y axis).
+        // The current hair setup uses mesh cards (e.g. quads).
+        // Hair is usually painted top-down, from the root to the tip.
+        // Therefore, DefaultHairStrandTangent = -MeshCardBitangent.
+        // Both the SurfaceData and the BSDFData store the hair tangent
+        // (which represents the hair strand direction, root to tip).
+        surfaceData.tangentWS = -fragInputs.worldToTangent[1].xyz;
+        // We use the following convention for the hair strand direction texture:
+        // TODO: ...
+        // ???
         $Tangent: surfaceData.tangentWS = TransformTangentToWorld(surfaceDescription.Tangent, fragInputs.worldToTangent);
-        surfaceData.tangentWS = Orthonormalize(surfaceData.tangentWS, surfaceData.normalWS);
+        // The original Kajiya-Kay BRDF model expects an orthonormal TN frame.
+        // Since we use the tangent shift hack (http://web.engr.oregonstate.edu/~mjb/cs519/Projects/Papers/HairRendering.pdf),
+        // we may as well not bother to orthonormalize anymore.
+        // The tangent should still be a unit vector, though.
+        surfaceData.tangentWS = normalize(surfaceData.tangentWS);
 
         // By default we use the ambient occlusion with Tri-ace trick (apply outside) for specular occlusion.
         // If user provide bent normal then we process a better term
