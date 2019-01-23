@@ -3,8 +3,6 @@
 namespace UnityEngine.Experimental.Rendering.HDPipeline
 {
 
-    /// ----------- ENUMS -----------
-
     public enum DynamicResolutionType : byte
     {
         Software,
@@ -14,11 +12,10 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
 
     public enum DynamicResUpscaleFilter : byte
     {
-        Point,
         Bilinear,
         CatmullRom,
         Lanczos, 
-        // Different of Gaussians? [aka unsharp]
+        // Difference of Gaussians? [aka unsharp]
     }
 
     [Serializable]

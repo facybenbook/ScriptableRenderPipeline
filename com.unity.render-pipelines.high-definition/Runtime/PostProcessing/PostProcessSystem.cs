@@ -1930,9 +1930,6 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             {
                 switch(dynResHandler.filter)
                 {
-                    case DynamicResUpscaleFilter.Point:
-                        m_FinalPassMaterial.EnableKeyword("POINT");
-                        break;
                     case DynamicResUpscaleFilter.Bilinear:
                         m_FinalPassMaterial.EnableKeyword("BILINEAR");
                         break;
@@ -1943,10 +1940,6 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
                         m_FinalPassMaterial.EnableKeyword("LANCZOS");
                         break;
                 }
-            }
-            else
-            {
-                m_FinalPassMaterial.EnableKeyword("NO_UPSCALE");
             }
 
             if (camera.antialiasing == AntialiasingMode.FastApproximateAntialiasing && !swDynamicResIsOn)
