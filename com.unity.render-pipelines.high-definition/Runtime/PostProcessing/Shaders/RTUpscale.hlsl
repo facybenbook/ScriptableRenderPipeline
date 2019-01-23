@@ -12,13 +12,13 @@ float3 Sample(TEXTURE2D_ARGS(_InputTexture, _InputTextureSampler), float2 UV)
 
 float3 Nearest(TEXTURE2D(_InputTexture), float2 UV)
 {
-    return Sample(_InputTexture, s_point_clamp_sampler, UV);
+    return Sample(TEXTURE2D_PARAM(_InputTexture, s_point_clamp_sampler), UV);
 }
 
 
 float3 Bilinear(TEXTURE2D(_InputTexture), float2 UV)
 {
-    return Sample(_InputTexture, s_linear_clamp_sampler, UV);
+    return Sample(TEXTURE2D_PARAM(_InputTexture, s_linear_clamp_sampler), UV);
 }
 
 float3 CatmullRomFourSamples(TEXTURE2D(_InputTexture), float2 UV)
