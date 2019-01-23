@@ -254,6 +254,10 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
         public void Render(CommandBuffer cmd, HDCamera camera, BlueNoise blueNoise, RTHandle colorBuffer, RTHandle lightingBuffer)
         {
             HDDynamicResolutionHandler dynResHandler = HDDynamicResolutionHandler.instance;
+
+            // We cleanup the pool at the beginning of the render function as resource deletion is immediate while
+            // graphics command are deferred. If we delete at the end of the frame, the gfx commands will try to access
+            // dead resources.
             if (dynResHandler.HardwareDynamicResIsEnabled() && dynResHandler.hasSwitchedResolution)
                 m_Pool.Cleanup();
 
