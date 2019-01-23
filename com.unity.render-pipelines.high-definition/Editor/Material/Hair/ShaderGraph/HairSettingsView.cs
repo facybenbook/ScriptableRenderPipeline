@@ -93,6 +93,20 @@ namespace UnityEditor.Experimental.Rendering.HDPipeline.Drawing
                     toggle.OnToggleChanged(ChangeAlphaTest);
                 });
             });
+            if(m_Node.alphaTest.isOn)
+            {
+                ++indentLevel;
+                ps.Add(new PropertyRow(CreateLabel("Alpha Cutoff Shadow", indentLevel)), (row) =>
+                {
+                    row.Add(new Toggle(), (toggle) =>
+                    {
+                        toggle.value = m_Node.alphaTestShadow.isOn;
+                        toggle.OnToggleChanged(ChangeAlphaTestShadow);
+                    });
+                });
+                --indentLevel;
+            }
+
 
             if (m_Node.surfaceType == SurfaceType.Transparent && m_Node.alphaTest.isOn)
             {
@@ -112,15 +126,6 @@ namespace UnityEditor.Experimental.Rendering.HDPipeline.Drawing
                     {
                         toggle.value = m_Node.alphaTestDepthPostpass.isOn;
                         toggle.OnToggleChanged(ChangeAlphaTestPostpass);
-                    });
-                });
-
-                ps.Add(new PropertyRow(CreateLabel("Alpha Cutoff Shadow", indentLevel)), (row) =>
-                {
-                    row.Add(new Toggle(), (toggle) =>
-                    {
-                        toggle.value = m_Node.alphaTestShadow.isOn;
-                        toggle.OnToggleChanged(ChangeAlphaTestShadow);
                     });
                 });
                 --indentLevel;
