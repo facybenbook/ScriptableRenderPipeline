@@ -54,8 +54,8 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
             public float thickness;
 
             // Anisotropic
-            [SurfaceDataAttributes("Tangent", true)]
-            public Vector3 tangentWS;
+            [SurfaceDataAttributes("Hair Strand Direction", true)]
+            public Vector3 hairStrandDirectionWS;
 
             // Kajiya kay
             [SurfaceDataAttributes("Secondary Smoothness")]
@@ -113,7 +113,7 @@ namespace UnityEngine.Experimental.Rendering.HDPipeline
 
             // Anisotropic
             [SurfaceDataAttributes("", true)]
-            public Vector3 tangentWS;
+            public Vector3 hairStrandDirectionWS;
             public float roughnessT;
             public float roughnessB;
             public float anisotropy;

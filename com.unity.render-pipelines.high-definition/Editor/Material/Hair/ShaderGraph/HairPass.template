@@ -231,16 +231,16 @@ $include("SharedCode.template.hlsl")
         // Therefore, DefaultHairStrandTangent = -MeshCardBitangent.
         // Both the SurfaceData and the BSDFData store the hair tangent
         // (which represents the hair strand direction, root to tip).
-        surfaceData.tangentWS = -fragInputs.worldToTangent[1].xyz;
+        surfaceData.hairStrandDirectionWS = -fragInputs.worldToTangent[1].xyz;
         // We use the following convention for the hair strand direction texture:
         // TODO: ...
         // ???
-        $Tangent: surfaceData.tangentWS = TransformTangentToWorld(surfaceDescription.Tangent, fragInputs.worldToTangent);
+        $HairStrandDirection: surfaceData.hairStrandDirectionWS = TransformTangentToWorld(surfaceDescription.HairStrandDirection, fragInputs.worldToTangent);
         // The original Kajiya-Kay BRDF model expects an orthonormal TN frame.
         // Since we use the tangent shift hack (http://web.engr.oregonstate.edu/~mjb/cs519/Projects/Papers/HairRendering.pdf),
         // we may as well not bother to orthonormalize anymore.
         // The tangent should still be a unit vector, though.
-        surfaceData.tangentWS = normalize(surfaceData.tangentWS);
+        surfaceData.hairStrandDirectionWS = normalize(surfaceData.hairStrandDirectionWS);
 
         // By default we use the ambient occlusion with Tri-ace trick (apply outside) for specular occlusion.
         // If user provide bent normal then we process a better term

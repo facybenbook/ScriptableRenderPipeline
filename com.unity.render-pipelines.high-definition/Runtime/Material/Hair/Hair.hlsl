@@ -165,7 +165,7 @@ BSDFData ConvertSurfaceDataToBSDFData(uint2 positionSS, SurfaceData surfaceData)
     }
 
     // This is the hair tangent (which represents the hair strand direction, root to tip).
-    bsdfData.tangentWS = surfaceData.tangentWS;
+    bsdfData.hairStrandDirectionWS = surfaceData.hairStrandDirectionWS;
 
     // Kajiya kay
     if (HasFlag(surfaceData.materialFeatures, MATERIALFEATUREFLAGS_HAIR_KAJIYA_KAY))
@@ -286,7 +286,7 @@ PreLightData GetPreLightData(float3 V, PositionInputs posInput, inout BSDFData b
     }
 
     // perceptualRoughness is use as input and output here
-    GetGGXAnisotropicModifiedNormalAndRoughness(bsdfData.tangentWS, bsdfData.tangentWS, N, V, bsdfData.anisotropy, preLightData.iblPerceptualRoughness, iblN, preLightData.iblPerceptualRoughness);
+    GetGGXAnisotropicModifiedNormalAndRoughness(bsdfData.hairStrandDirectionWS, bsdfData.hairStrandDirectionWS, N, V, bsdfData.anisotropy, preLightData.iblPerceptualRoughness, iblN, preLightData.iblPerceptualRoughness);
 
     preLightData.iblR = reflect(-V, iblN);
 
@@ -374,8 +374,8 @@ void BSDF(  float3 V, float3 L, float NdotL, float3 positionWS, PreLightData pre
 
     if (HasFlag(bsdfData.materialFeatures, MATERIALFEATUREFLAGS_HAIR_KAJIYA_KAY))
     {
-        float3 t1 = ShiftTangent(bsdfData.tangentWS, bsdfData.normalWS, bsdfData.specularShift);
-        float3 t2 = ShiftTangent(bsdfData.tangentWS, bsdfData.normalWS, bsdfData.secondarySpecularShift);
+        float3 t1 = ShiftTangent(bsdfData.hairStrandDirectionWS, bsdfData.normalWS, bsdfData.specularShift);
+        float3 t2 = ShiftTangent(bsdfData.hairStrandDirectionWS, bsdfData.normalWS, bsdfData.secondarySpecularShift);
 
         float3 H = (L + V) * invLenLV;
 

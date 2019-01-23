@@ -26,7 +26,7 @@
 #define DEBUGVIEW_HAIR_SURFACEDATA_DIFFUSION_PROFILE (1409)
 #define DEBUGVIEW_HAIR_SURFACEDATA_SUBSURFACE_MASK (1410)
 #define DEBUGVIEW_HAIR_SURFACEDATA_THICKNESS (1411)
-#define DEBUGVIEW_HAIR_SURFACEDATA_TANGENT (1412)
+#define DEBUGVIEW_HAIR_SURFACEDATA_HAIR_STRAND_DIRECTION (1412)
 #define DEBUGVIEW_HAIR_SURFACEDATA_SECONDARY_SMOOTHNESS (1413)
 #define DEBUGVIEW_HAIR_SURFACEDATA_SPECULAR_TINT (1414)
 #define DEBUGVIEW_HAIR_SURFACEDATA_SECONDARY_SPECULAR_TINT (1415)
@@ -52,7 +52,7 @@
 #define DEBUGVIEW_HAIR_BSDFDATA_THICKNESS (1463)
 #define DEBUGVIEW_HAIR_BSDFDATA_USE_THICK_OBJECT_MODE (1464)
 #define DEBUGVIEW_HAIR_BSDFDATA_TRANSMITTANCE (1465)
-#define DEBUGVIEW_HAIR_BSDFDATA_TANGENT_WS (1466)
+#define DEBUGVIEW_HAIR_BSDFDATA_HAIR_STRAND_DIRECTION_WS (1466)
 #define DEBUGVIEW_HAIR_BSDFDATA_ROUGHNESS_T (1467)
 #define DEBUGVIEW_HAIR_BSDFDATA_ROUGHNESS_B (1468)
 #define DEBUGVIEW_HAIR_BSDFDATA_ANISOTROPY (1469)
@@ -77,7 +77,7 @@ struct SurfaceData
     uint diffusionProfile;
     float subsurfaceMask;
     float thickness;
-    float3 tangentWS;
+    float3 hairStrandDirectionWS;
     float secondaryPerceptualSmoothness;
     float3 specularTint;
     float3 secondarySpecularTint;
@@ -103,7 +103,7 @@ struct BSDFData
     float thickness;
     bool useThickObjectMode;
     float3 transmittance;
-    float3 tangentWS;
+    float3 hairStrandDirectionWS;
     float roughnessT;
     float roughnessB;
     float anisotropy;
@@ -159,8 +159,8 @@ void GetGeneratedSurfaceDataDebug(uint paramId, SurfaceData surfacedata, inout f
         case DEBUGVIEW_HAIR_SURFACEDATA_THICKNESS:
             result = surfacedata.thickness.xxx;
             break;
-        case DEBUGVIEW_HAIR_SURFACEDATA_TANGENT:
-            result = surfacedata.tangentWS * 0.5 + 0.5;
+        case DEBUGVIEW_HAIR_SURFACEDATA_HAIR_STRAND_DIRECTION:
+            result = surfacedata.hairStrandDirectionWS * 0.5 + 0.5;
             break;
         case DEBUGVIEW_HAIR_SURFACEDATA_SECONDARY_SMOOTHNESS:
             result = surfacedata.secondaryPerceptualSmoothness.xxx;
@@ -238,8 +238,8 @@ void GetGeneratedBSDFDataDebug(uint paramId, BSDFData bsdfdata, inout float3 res
         case DEBUGVIEW_HAIR_BSDFDATA_TRANSMITTANCE:
             result = bsdfdata.transmittance;
             break;
-        case DEBUGVIEW_HAIR_BSDFDATA_TANGENT_WS:
-            result = bsdfdata.tangentWS * 0.5 + 0.5;
+        case DEBUGVIEW_HAIR_BSDFDATA_HAIR_STRAND_DIRECTION_WS:
+            result = bsdfdata.hairStrandDirectionWS * 0.5 + 0.5;
             break;
         case DEBUGVIEW_HAIR_BSDFDATA_ROUGHNESS_T:
             result = bsdfdata.roughnessT.xxx;
