@@ -108,7 +108,7 @@ namespace UnityEngine.Experimental.Rendering
                         // Free the previous version
                         renderTexture.Release();
 
-                        renderTexture.useDynamicScale = m_HardwareDynamicResRequested && rth.m_EnableHWDynamicSize;
+                        renderTexture.useDynamicScale = m_HardwareDynamicResRequested && rth.m_EnableHWDynamicScale;
 
                         // Create the render texture
                         renderTexture.Create();
@@ -355,7 +355,7 @@ namespace UnityEngine.Experimental.Rendering
             newRT.useScaling = false;
             newRT.m_EnableRandomWrite = enableRandomWrite;
             newRT.m_EnableMSAA = enableMSAA;
-            newRT.m_EnableHWDynamicSize = useDynamicScale;
+            newRT.m_EnableHWDynamicScale = useDynamicScale;
             newRT.m_Name = name;
 
             newRT.referenceSize = new Vector2Int(width, height);
@@ -592,7 +592,7 @@ namespace UnityEngine.Experimental.Rendering
             rth.m_EnableMSAA = enableMSAA;
             rth.m_EnableRandomWrite = enableRandomWrite;
             rth.useScaling = true;
-            rth.m_EnableHWDynamicSize = useDynamicScale;
+            rth.m_EnableHWDynamicScale = useDynamicScale;
             rth.m_Name = name;
             m_AutoSizedRTs.Add(rth);
             return rth;
