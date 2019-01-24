@@ -5,8 +5,8 @@ Shader "Hidden/HDRP/FinalPass"
         #pragma target 4.5
         #pragma only_renderers d3d11 ps4 xboxone vulkan metal switch
 
-        #pragma multi_compile _ FXAA
-        #pragma multi_compile _ GRAIN
+        #pragma multi_compile_local _ FXAA
+        #pragma multi_compile_local _ GRAIN
 
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Common.hlsl"
         #include "Packages/com.unity.render-pipelines.core/ShaderLibrary/Color.hlsl"
