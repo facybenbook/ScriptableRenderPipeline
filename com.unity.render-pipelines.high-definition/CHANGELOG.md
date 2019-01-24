@@ -37,6 +37,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added Material validator in Render Pipeline Debug
 - Added code to future support of DXR (not enabled)
 - Added support of multiviewport
+- Added HDRenderPipeline.RequestSkyEnvironmentUpdate function to force an update from script when sky is set to OnDemand
 
 ### Fixed
 - Fixed logic to disable FPTL with stereo rendering
@@ -85,6 +86,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed error message when having more than one directional light casting shadow
 - Fixed error when trying to display preview of Camera or PlanarReflectionProbe
 - Fixed an issue where sky cubemap would not be cleared correctly when setting the current sky to None
+- Fixed a typo in Staitc Lighting Sky component UI
 
 ### Changed
 - ColorPyramid compute shader passes is swapped to pixel shader passes on platforms where the later is faster (Nintendo Switch).
