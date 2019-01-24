@@ -149,7 +149,7 @@ Shader "Hidden/HDRP/FinalPass"
             #if GRAIN
             {
                 // Grain in range [0;1] with neutral at 0.5
-                int2 icoords = (positionSS + int2(_GrainTextureParams.zw)) % int2(_GrainTextureParams.xy);
+                uint2 icoords = fmod(positionSS + _GrainTextureParams.zw, _GrainTextureParams.xy);
                 float grain = LOAD_TEXTURE2D(_GrainTexture, icoords).w;
 
                 // Remap [-1;1]
