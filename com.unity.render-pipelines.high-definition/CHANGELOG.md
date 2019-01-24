@@ -22,9 +22,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Added new Rendering Queue in materials
 - Added post-processing V3 framework embed in HDRP, remove postprocess V2 framework
 - Post-processing now uses the generic volume framework
-  - New depth-of-field, bloom, panini projection effects, motion blur
-- Exposure is now done as a pre-exposition pass, the whole system has been revamped
-- Exposure now use EV100 everywhere in the UI (Sky, Emissive Light)
+-   New depth-of-field, bloom, panini projection effects, motion blur
+-   Exposure is now done as a pre-exposition pass, the whole system has been revamped
+-   Exposure now use EV100 everywhere in the UI (Sky, Emissive Light)
 - Added emissive intensity (Luminance and EV100 control) control for Emissive
 - Added pre-exposure weigth for Emissive
 - Added an emissive color node and a slider to control the pre-exposure percentage of emission color
@@ -86,7 +86,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 - Fixed error message when having more than one directional light casting shadow
 - Fixed error when trying to display preview of Camera or PlanarReflectionProbe
 - Fixed an issue where sky cubemap would not be cleared correctly when setting the current sky to None
-- Fixed a typo in Staitc Lighting Sky component UI
+- Fixed a typo in Static Lighting Sky component UI
 
 ### Changed
 - ColorPyramid compute shader passes is swapped to pixel shader passes on platforms where the later is faster (Nintendo Switch).
