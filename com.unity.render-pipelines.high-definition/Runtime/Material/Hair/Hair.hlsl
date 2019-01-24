@@ -387,7 +387,7 @@ void BSDF(  float3 V, float3 L, float NdotL, float3 positionWS, PreLightData pre
 
         // Diffuse lighting
         float diffuseTerm = Lambert();
-        diffuseLighting = bsdfData.diffuseColor * diffuseTerm;
+        diffuseLighting = diffuseTerm;
     }
     else
     {
