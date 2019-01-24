@@ -64,9 +64,11 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
         {
             SpecularSource specularSource = (SpecularSource)properties.specHighlights.floatValue;
             EditorGUI.BeginChangeCheck();
+            EditorGUI.showMixedValue = properties.specHighlights.hasMixedValue;
             bool enabled = EditorGUILayout.Toggle(Styles.highlightsText, specularSource == SpecularSource.SpecularTextureAndColor);
             if (EditorGUI.EndChangeCheck())
                 properties.specHighlights.floatValue = enabled ? (float)SpecularSource.SpecularTextureAndColor : (float)SpecularSource.NoSpecular;
+            EditorGUI.showMixedValue = false;
         }
 
         public static void DoSpecularArea(SimpleLitProperties properties, MaterialEditor materialEditor, Material material)
@@ -83,25 +85,31 @@ namespace UnityEditor.Rendering.LWRP.ShaderGUI
             var opaque = ((BaseShaderGUI.SurfaceType) material.GetFloat("_Surface") ==
                           BaseShaderGUI.SurfaceType.Opaque);
             EditorGUI.indentLevel += 2;
+            EditorGUI.BeginChangeCheck();
+            EditorGUI.showMixedValue = properties.specColor.hasMixedValue || properties.smoothnessMapChannel.hasMixedValue;
             var smoothnessSource = (int)properties.smoothnessMapChannel.floatValue;
             var specColor = (smoothnessSource == 0 || !opaque) ? properties.specColor.colorValue : material.GetColor("_BaseColor");
             specColor.a = EditorGUILayout.Slider(Styles.smoothnessText, specColor.a, 0f, 1f);
-
-            if (smoothnessSource == 0 || !opaque)
-                properties.specColor.colorValue = specColor;
-            else
-                material.SetColor("_BaseColor", specColor);
+            if (EditorGUI.EndChangeCheck())
+            {
+                if (smoothnessSource == 0 || !opaque)
+                    properties.specColor.colorValue = specColor;
+                else
+                    material.SetColor("_BaseColor", specColor);
+            }
+            EditorGUI.showMixedValue = false;
 
             EditorGUI.indentLevel++;
             EditorGUI.BeginDisabledGroup(!opaque);
             EditorGUI.BeginChangeCheck();
+            EditorGUI.showMixedValue = properties.smoothnessMapChannel.hasMixedValue;
             if(opaque)
                 smoothnessSource = EditorGUILayout.Popup(Styles.smoothnessMapChannelText, smoothnessSource, Enum.GetNames(typeof(SmoothnessMapChannel)));
             else
                 EditorGUILayout.Popup(Styles.smoothnessMapChannelText, 0, Enum.GetNames(typeof(SmoothnessMapChannel)));
             if (EditorGUI.EndChangeCheck())
                 properties.smoothnessMapChannel.floatValue = smoothnessSource;
-
+            EditorGUI.showMixedValue = false;
             EditorGUI.indentLevel -= 3;
             EditorGUI.EndDisabledGroup();
         }
