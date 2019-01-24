@@ -114,7 +114,7 @@ Material:
     - _AlphaCutoff: 0
     - _AlphaCutoffEnable: 0
     - _AlphaCutoffPostpass: 0.25
-    - _AlphaCutoffPrepass: 0.8
+    - _AlphaCutoffPrepass: 0.96
     - _AlphaCutoffShadows: 0.8
     - _Anisotropy: 0
     - _BlendMode: 0
