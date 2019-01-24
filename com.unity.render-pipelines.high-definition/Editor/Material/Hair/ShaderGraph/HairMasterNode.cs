@@ -33,7 +33,7 @@ namespace UnityEditor.Experimental.Rendering.HDPipeline
         public const string BentNormalSlotName = "BentNormal";
         public const int BentNormalSlotId = 4;
 
-        public const string HairStrandDirectionSlotName = "Hair Strand Direction";
+        public const string HairStrandDirectionSlotName = "HairStrandDirection";
         public const int HairStrandDirectionSlotId = 5;
 
         public const string SubsurfaceMaskSlotName = "SubsurfaceMask";
@@ -556,7 +556,7 @@ namespace UnityEditor.Experimental.Rendering.HDPipeline
             }
             if (MaterialTypeUsesSlotMask(SlotMask.HairStrandDirection))
             {
-                AddSlot(new TangentMaterialSlot(HairStrandDirectionSlotId, HairStrandDirectionSlotName, HairStrandDirectionSlotName, CoordinateSpace.Tangent, ShaderStageCapability.Fragment));
+                AddSlot(new Vector3MaterialSlot(HairStrandDirectionSlotId, HairStrandDirectionSlotName, HairStrandDirectionSlotName, SlotType.Input, new Vector3(0, -1, 0), ShaderStageCapability.Fragment));
                 validSlots.Add(HairStrandDirectionSlotId);
             }
             if (MaterialTypeUsesSlotMask(SlotMask.Emission))

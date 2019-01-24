@@ -581,7 +581,7 @@ namespace UnityEditor.Experimental.Rendering.HDPipeline
 
             if (masterNode.IsSlotConnected(HairMasterNode.HairStrandDirectionSlotId) && pass.PixelShaderUsesSlot(HairMasterNode.HairStrandDirectionSlotId))
             {
-                activeFields.Add("Tangent");
+                activeFields.Add("HairStrandDirection");
             }
 
             if (masterNode.transmission.isOn)
